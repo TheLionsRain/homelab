@@ -1,0 +1,3 @@
+---
+- name: Join Docker Swarm
+  ansible.builtin.include_tasks: join.yml
