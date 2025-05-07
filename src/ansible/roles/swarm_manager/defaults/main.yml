@@ -1,0 +1,2 @@
+---
+manager_token: "#{SWARM_MANAGER_TOKEN}#"
