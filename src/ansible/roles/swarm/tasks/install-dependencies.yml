@@ -1,0 +1,12 @@
+---
+- name: Install dependencies
+  ansible.builtin.apt:
+    name:
+      - ca-certificates
+      - curl
+      - python3-docker
+      - python3-kubernetes
+      - python3-jsondiff
+    state: present
+    update_cache: true
+  become: true
