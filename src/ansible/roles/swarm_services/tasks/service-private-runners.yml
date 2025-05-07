@@ -1,0 +1,22 @@
+---
+- name: "Create services folder {{ services_folder }}"
+  ansible.builtin.file:
+    path: "{{ services_folder }}/private-runner"
+    state: directory
+    mode: '0755'
+  become: true
+
+- name: "Template the docker-compose file"
+  ansible.builtin.template:
+    src: private-runner-compose.yml.jinja2
+    dest: "{{ services_folder }}/private-runner/docker-compose.yml"
+    mode: '0644'
+  become: true
+
+- name: Deploy the private runner service
+  community.docker.docker_stack:
+    state: present
+    name: private-runners
+    compose:
+      - "{{ services_folder }}/private-runner/docker-compose.yml"
+  become: true

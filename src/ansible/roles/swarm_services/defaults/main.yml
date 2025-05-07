@@ -1,0 +1,3 @@
+---
+services_folder: "/opt/docker/stacks"
+access_token: "#{ACCESS_TOKEN}#"

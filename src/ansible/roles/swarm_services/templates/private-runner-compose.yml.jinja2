@@ -1,0 +1,14 @@
+---
+services:
+  github-runner:
+    image: livingwooods/github-runner:1.1.0
+    deploy:
+      replicas: 2
+    environment:
+      - ORG_NAME=TheLionsRain
+      - ACCESS_TOKEN={{ access_token }}
+      - RUNNER_GROUP=muspelheim
+      - RUNNER_SCOPE=org
+      - EPHEMERAL=1
+    volumes:
+      - /var/run/docker.sock:/var/run/docker.sock
