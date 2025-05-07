@@ -1,0 +1,19 @@
+---
+name: CI - Ansible
+
+on:
+  pull_request:
+    branches: 
+    - main
+    paths:
+    - src/ansible/**
+
+jobs:
+  lint-ansible:
+    name: Validate Ansible
+    uses: TheLionsRain/reusable-workflows/.github/workflows/lint-ansible.yml@lint-ansible-v1.0.0
+    with:
+      RUNS_ON: ubuntu-24.04
+      PYTHON_VERSION: 3.13
+      YAMLLINT_CONFIG_PATH: .yamllint
+      ANSIBLE_PATH: src/ansible/
