@@ -1,0 +1,6 @@
+---
+- name: Join Docker Swarm - Manager
+  hosts: muspelheim_managers
+  roles:
+    - swarm
+    - swarm_manager

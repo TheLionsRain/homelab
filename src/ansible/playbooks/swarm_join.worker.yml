@@ -1,0 +1,6 @@
+---
+- name: Join Docker Swarm - Worker
+  hosts: muspelheim_workers
+  roles:
+    - swarm
+    - swarm_worker
