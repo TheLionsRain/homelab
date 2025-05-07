@@ -1,0 +1,5 @@
+---
+- name: Initialize Docker Swarm
+  hosts: muspelheim_leader
+  roles:
+    - swarm_services
