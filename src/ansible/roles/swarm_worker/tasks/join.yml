@@ -1,0 +1,7 @@
+---
+- name: Join Docker Swarm
+  community.docker.docker_swarm:
+    state: join
+    join_token: "{{ worker_token }}"
+    remote_addrs: ["{{ leader_ip }}"]
+  become: true
