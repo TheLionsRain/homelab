@@ -19,7 +19,7 @@ jobs:
       ENVIRONMENT: muspelheim
       SSH_KEY_PATH: ~/.ssh/muspelheim
       FILES_TO_TOKENIZE: '["src/ansible/roles/swarm_manager/defaults/main.yml"]'
-      INVENTORY: src/ansible/inventory.yml
+      INVENTORY: src/ansible/inventories/muspelheim.yml
       PLAYBOOK_PATH: src/ansible/playbooks
       PLAYBOOK: swarm_join.manager.yml
     secrets:
