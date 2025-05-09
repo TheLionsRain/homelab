@@ -1,0 +1,29 @@
+---
+name: CD - Swarm Manager
+
+on:
+  push:
+    branches:
+    - main
+    paths:
+    - src/ansible/inventories/muspelheim.yml
+    - src/ansible/playbooks/swarm_join.manager.yml
+    - src/ansible/roles/swarm_manager/**
+
+jobs:
+  deploy-muspelheim-swarm-managers:
+    name: Deploy Swarm Manager
+    uses: TheLionsRain/reusable-workflows/.github/workflows/deploy-ansible.yml@deploy-ansible-v1.0.0
+    with:
+      RUNS_ON: self-hosted
+      ENVIRONMENT: muspelheim
+      SSH_KEY_PATH: ~/.ssh/muspelheim
+      FILES_TO_TOKENIZE: '["src/ansible/roles/swarm_manager/defaults/main.yml"]'
+      INVENTORY: src/ansible/inventory.yml
+      PLAYBOOK_PATH: src/ansible/playbooks
+      PLAYBOOK: swarm_join.manager.yml
+    secrets:
+      SSH_KEY: ${{ secrets.SSH_KEY }}
+      TOKENS: '{
+          "SWARM_MANAGER_TOKEN": "${{ secrets.SWARM_MANAGER_TOKEN }}"
+        }'
