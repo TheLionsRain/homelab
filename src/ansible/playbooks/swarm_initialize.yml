@@ -4,3 +4,4 @@
   roles:
     - swarm
     - swarm_leader
+    - swarm_services
