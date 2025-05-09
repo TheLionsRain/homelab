@@ -1,0 +1,28 @@
+---
+name: CD - Swarm Services
+
+on:
+  push:
+    branches:
+    - main
+    paths:
+    - src/ansible/playbooks/swarm_deploy-services.yml
+    - src/ansible/roles/swarm_services/**
+
+jobs:
+  deploy-muspelheim-swarm-services:
+    name: Deploy Swarm Services
+    uses: TheLionsRain/reusable-workflows/.github/workflows/deploy-ansible.yml@deploy-ansible-v1.0.0
+    with:
+      RUNS_ON: self-hosted
+      ENVIRONMENT: muspelheim
+      SSH_KEY_PATH: ~/.ssh/muspelheim
+      FILES_TO_TOKENIZE: '["src/ansible/roles/swarm_services/defaults/main.yml"]'
+      INVENTORY: src/ansible/inventory.yml
+      PLAYBOOK_PATH: src/ansible/playbooks
+      PLAYBOOK: swarm_deploy-services.yml
+    secrets:
+      SSH_KEY: ${{ secrets.SSH_KEY }}
+      TOKENS: '{
+          "ACCESS_TOKEN": "${{ secrets.ACCESS_TOKEN }}",
+        }'
