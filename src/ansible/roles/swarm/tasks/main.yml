@@ -5,5 +5,8 @@
     state: directory
     mode: '0755'
 
+- name: Install Dependencies
+  ansible.builtin.include_tasks: install-dependencies.yml
+
 - name: Install Docker
   ansible.builtin.include_tasks: install-docker.yml
