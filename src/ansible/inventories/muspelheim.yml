@@ -14,24 +14,24 @@ all:
       ansible_ssh_private_key_file: ~/.ssh/muspelheim
       ansible_user: michiel
 
-children:
-  ubuntu:
-    hosts:
-      muspelheim-001:
-      muspelheim-002:
-      muspelheim-003:
+  children:
+    ubuntu:
+      hosts:
+        muspelheim-001:
+        muspelheim-002:
+        muspelheim-003:
 
-  muspelheim_cluster:
-    hosts:
-      muspelheim-001:
-      muspelheim-002:
-      muspelheim-003:
+    muspelheim_cluster:
+      hosts:
+        muspelheim-001:
+        muspelheim-002:
+        muspelheim-003:
 
-  muspelheim_leader:
-    hosts:
-      muspelheim-001:
+    muspelheim_leader:
+      hosts:
+        muspelheim-001:
 
-  muspelheim_managers:
-    hosts:
-      muspelheim-002:
-      muspelheim-003:
+    muspelheim_managers:
+      hosts:
+        muspelheim-002:
+        muspelheim-003:
