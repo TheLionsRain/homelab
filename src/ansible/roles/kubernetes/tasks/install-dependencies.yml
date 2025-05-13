@@ -1,0 +1,14 @@
+---
+- name: Install dependencies
+  ansible.builtin.apt:
+    name:
+      - apt-transport-https
+      - ca-certificates
+      - curl
+      - gnupg
+      - lsb-release
+      - python3-kubernetes
+      - python3-jsondiff
+    state: present
+    update_cache: true
+  become: true
