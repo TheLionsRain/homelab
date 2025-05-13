@@ -1,0 +1,53 @@
+---
+- name: Download Helm signing key (raw)
+  ansible.builtin.get_url:
+    url: https://baltocdn.com/helm/signing.asc
+    dest: /tmp/helm-signing.asc
+    mode: '0644'
+  when: not ansible_facts.files['/usr/share/keyrings/helm.gpg'] is defined
+
+- name: Convert Helm signing key to GPG format
+  ansible.builtin.command:
+    cmd: gpg --dearmor -o /usr/share/keyrings/helm.gpg /tmp/helm-signing.asc
+  args:
+    creates: /usr/share/keyrings/helm.gpg
+  become: true
+
+- name: Remove temporary raw Helm signing key
+  ansible.builtin.file:
+    path: /tmp/helm-signing.asc
+    state: absent
+
+- name: Ensure apt-transport-https is installed
+  ansible.builtin.apt:
+    name: apt-transport-https
+    state: present
+  become: true
+
+- name: Add Helm repository
+  ansible.builtin.shell: >
+    echo "deb [arch=$(dpkg --print-architecture) signed-by=/usr/share/keyrings/helm.gpg]
+    https://baltocdn.com/helm/stable/debian/ all main"
+    > /etc/apt/sources.list.d/helm-stable-debian.list
+  args:
+    creates: /etc/apt/sources.list.d/helm-stable-debian.list
+  become: true
+
+- name: Update package list
+  ansible.builtin.apt:
+    update_cache: true
+  become: true
+
+- name: Install Helm
+  ansible.builtin.apt:
+    name: helm
+    state: present
+  become: true
+
+- name: Create Helm directory
+  ansible.builtin.file:
+    path: /opt/kubernetes/helm
+    state: directory
+    mode: '0755'
+    owner: "{{ ansible_user }}"
+  become: true
