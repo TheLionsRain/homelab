@@ -25,6 +25,7 @@ resource kv 'Microsoft.KeyVault/vaults@2024-12-01-preview' = {
 
 resource secrets 'Microsoft.KeyVault/vaults/secrets@2024-12-01-preview' = [
   for secret in keyVault.secrets: {
+    parent: kv
     name: secret.name
     properties: {
       value: secret.value
