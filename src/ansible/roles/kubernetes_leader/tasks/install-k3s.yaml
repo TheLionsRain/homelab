@@ -1,0 +1,57 @@
+---
+- name: Create K3S directory
+  ansible.builtin.file:
+    path: /etc/rancher/k3s
+    state: directory
+    mode: '0755'
+    owner: "{{ ansible_user }}"
+    recurse: true
+  become: true
+
+- name: Template the K3S config file
+  ansible.builtin.template:
+    src: k3s/config.yaml.jinja2
+    dest: /etc/rancher/k3s/config.yaml
+    mode: '0644'
+  become: true
+
+- name: Gather service facts
+  ansible.builtin.service_facts:
+
+- name: Check if k3s service is active
+  ansible.builtin.set_fact:
+    k3s_active: "{{ ansible_facts.services['k3s.service'].state == 'running' }}"
+  when: "'k3s.service' in ansible_facts.services"
+
+- name: Ensure get.k3s.io is downloaded
+  ansible.builtin.get_url:
+    url: https://get.k3s.io
+    dest: /tmp/get_k3s.sh
+    mode: '0755'
+  when: not k3s_active | default(false)
+
+- name: Run K3S installer script
+  ansible.builtin.shell: |
+    set -o pipefail
+    /tmp/get_k3s.sh server
+  args:
+    executable: /bin/bash
+    creates: /usr/local/bin/k3s
+  when: not k3s_active | default(false)
+  become: true
+
+- name: Create .kube directory
+  ansible.builtin.file:
+    path: "/home/{{ ansible_user }}/.kube"
+    state: directory
+    owner: "{{ ansible_user }}"
+    mode: '0755'
+
+- name: Copy K3S kubectl config
+  ansible.builtin.copy:
+    remote_src: true
+    src: /etc/rancher/k3s/k3s.yaml
+    dest: "/home/{{ ansible_user }}/.kube/config"
+    owner: "{{ ansible_user }}"
+    mode: '0644'
+  become: true
