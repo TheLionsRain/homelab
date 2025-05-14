@@ -14,3 +14,7 @@ all:
     helheim_cluster:
       hosts:
         helheim-001:
+
+    helheim_leader:
+      hosts:
+        helheim-001:
