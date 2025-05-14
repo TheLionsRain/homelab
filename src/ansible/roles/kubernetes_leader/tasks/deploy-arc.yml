@@ -21,7 +21,7 @@
     AZURE_CONFIG_DIR: "/tmp/.azure"
   register: arc_connect_result
   changed_when: "'Connected' in arc_connect_result.stdout or 'already connected' in arc_connect_result.stdout"
- 
+
 - name: Get OIDC issuer URL from Azure Arc Kubernetes cluster
   ansible.builtin.command: >
     az connectedk8s show

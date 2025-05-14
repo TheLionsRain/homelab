@@ -27,22 +27,23 @@
     url: https://raw.githubusercontent.com/cilium/cilium-cli/main/stable.txt
     return_content: true
   register: cilium_cli_version
-  when: not cilium_installed
+  # when: not cilium_installed
 
 - name: Determine CLI architecture
   ansible.builtin.set_fact:
     cli_arch: "{{ 'arm64' if ansible_architecture == 'aarch64' else 'amd64' }}"
-  when: not cilium_installed
+  # when: not cilium_installed
 
 - name: Download Cilium CLI tarball and checksum
   ansible.builtin.get_url:
-    url: "https://github.com/cilium/cilium-cli/releases/download/{{ cilium_cli_version.content | trim }}/cilium-linux-{{ cli_arch }}.tar.gz{{ item }}"
+    url: >-
+      https://github.com/cilium/cilium-cli/releases/download/{{ cilium_cli_version.content | trim }}/cilium-linux-{{ cli_arch }}.tar.gz{{ item }}
     dest: "/tmp/cilium-linux-{{ cli_arch }}.tar.gz{{ item }}"
     mode: '0644'
   loop:
     - ""
     - ".sha256sum"
-  when: not cilium_installed
+  # when: not cilium_installed
 
 - name: Verify downloaded Cilium CLI checksum
   ansible.builtin.command: sha256sum --check cilium-linux-{{ cli_arch }}.tar.gz.sha256sum
