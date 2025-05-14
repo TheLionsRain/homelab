@@ -11,9 +11,17 @@ on:
 jobs:
   lint-ansible:
     name: Validate Ansible
-    uses: TheLionsRain/reusable-workflows/.github/workflows/lint-ansible.yml@lint-ansible-v1.0.0
+    uses: TheLionsRain/reusable-workflows/.github/workflows/lint-ansible.yml@lint-ansible-v1.1.0
+    with:
+      RUNS_ON: ubuntu-24.04
+      PYTHON_VERSION: 3.13
+      ANSIBLE_PATH: src/ansible/
+
+  lint-yaml:
+    name: Validate YAML
+    uses: TheLionsRain/reusable-workflows/.github/workflows/lint-yaml.yml@lint-yaml-v1.0.0
     with:
       RUNS_ON: ubuntu-24.04
       PYTHON_VERSION: 3.13
       YAMLLINT_CONFIG_PATH: .yamllint
-      ANSIBLE_PATH: src/ansible/
+      LINT_PATH: src/ansible/
