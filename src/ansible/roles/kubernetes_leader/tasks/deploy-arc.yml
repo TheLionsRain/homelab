@@ -1,0 +1,58 @@
+---
+- name: Login to Azure using service principal
+  ansible.builtin.shell: |
+    az login --service-principal \
+      --username "{{ azure_client_id }}" \
+      --password "{{ azure_client_secret }}" \
+      --tenant "{{ azure_tenant_id }}"
+  environment:
+    AZURE_CONFIG_DIR: "/tmp/.azure"
+  register: azure_login_result
+  changed_when: false
+
+- name: Connect Kubernetes cluster to Azure Arc
+  ansible.builtin.shell: |
+    az connectedk8s connect \
+      --name "{{ azure_arc_cluster_name }}" \
+      --resource-group "{{ azure_arc_resource_group }}" \
+      --enable-oidc-issuer \
+      --enable-workload-identity
+  environment:
+    AZURE_CONFIG_DIR: "/tmp/.azure"
+  register: arc_connect_result
+  changed_when: "'Connected' in arc_connect_result.stdout or 'already connected' in arc_connect_result.stdout"
+ 
+- name: Get OIDC issuer URL from Azure Arc Kubernetes cluster
+  ansible.builtin.command: >
+    az connectedk8s show
+    --name "{{ azure_arc_cluster_name }}"
+    --resource-group "{{ azure_arc_resource_group }}"
+    --query "oidcIssuerProfile.issuerUrl"
+    --output tsv
+  register: oidc_issuer_query
+  changed_when: false
+
+- name: Set OIDC issuer fact
+  ansible.builtin.set_fact:
+    oidc_issuer: "{{ oidc_issuer_query.stdout }}"
+
+- name: Ensure kube-apiserver-arg exists in k3s config
+  ansible.builtin.lineinfile:
+    path: /etc/rancher/k3s/config.yaml
+    line: "kube-apiserver-arg:"
+    state: present
+    insertbefore: BOF
+  when: oidc_issuer is defined
+  become: true
+
+- name: Add OIDCrelated kube-apiserver args to k3s config
+  ansible.builtin.blockinfile:
+    path: /etc/rancher/k3s/config.yaml
+    marker: "# {mark} ANSIBLE MANAGED BLOCK: OIDC CONFIG"
+    insertafter: '^kube-apiserver-arg:'
+    block: |
+      - "service-account-issuer={{ oidc_issuer }}"
+      - "service-account-max-token-expiration=24h"
+  when: oidc_issuer is defined
+  become: true
+  notify: Restart k3s

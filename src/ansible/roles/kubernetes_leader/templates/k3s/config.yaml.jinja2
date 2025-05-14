@@ -1,0 +1,5 @@
+write-kubeconfig-mode: 0644
+disable: {{ disabled_components | to_yaml }}
+tls-san: {{ tls_sans | to_yaml }}
+cluster-init: true
+flannel-backend: none

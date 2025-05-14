@@ -1,0 +1,27 @@
+---
+- name: Install K3S
+  ansible.builtin.include_tasks: install-k3s.yaml
+
+- name: Create manifests folder
+  ansible.builtin.file:
+    path: /opt/kubernetes/manifests
+    state: directory
+    mode: '0755'
+    owner: "{{ ansible_user }}"
+    group: "{{ ansible_user }}"
+    recurse: true
+  become: true
+
+- name: Apply Gateway API CRDs
+  kubernetes.core.k8s:
+    src: https://github.com/kubernetes-sigs/gateway-api/releases/download/v1.3.0/standard-install.yaml
+    state: present
+
+- name: Install Cilium
+  ansible.builtin.include_tasks: deploy-cilium.yml
+
+# - name: Deploy Azure Arc
+#   ansible.builtin.include_tasks: deploy-arc.yml
+
+- name: Deploy External Secrets
+  ansible.builtin.include_tasks: deploy-externalsecrets.yml
