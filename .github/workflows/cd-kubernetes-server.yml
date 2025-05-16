@@ -1,0 +1,29 @@
+---
+name: CD - Kubernetes Server
+
+on:
+  push:
+    branches:
+    - main
+    paths:
+    - src/ansible/inventories/helheim.yml
+    - src/ansible/playbooks/kubernetes_join.server.yml
+    - src/ansible/roles/kubernetes_server/**
+
+jobs:
+  deploy-helheim-kubernetes-servers:
+    name: Deploy Kubernetes Server
+    uses: TheLionsRain/reusable-workflows/.github/workflows/deploy-ansible.yml@deploy-ansible-v1.0.0
+    with:
+      RUNS_ON: self-hosted
+      ENVIRONMENT: helheim
+      SSH_KEY_PATH: ~/.ssh/helheim
+      FILES_TO_TOKENIZE: '["src/ansible/inventories/group_vars/helheim_cluster.yml"]'
+      INVENTORY: src/ansible/inventories/helheim.yml
+      PLAYBOOK_PATH: src/ansible/playbooks
+      PLAYBOOK: kubernetes_join.server.yml
+    secrets:
+      SSH_KEY: ${{ secrets.SSH_KEY }}
+      TOKENS: '{
+          "K3S_JOIN_TOKEN": "${{ secrets.K3S_JOIN_TOKEN }}"
+        }'
