@@ -1,0 +1,6 @@
+---
+- name: Join Kubernetes - Server
+  hosts: helheim_servers
+  roles:
+    - kubernetes
+    - kubernetes_server
