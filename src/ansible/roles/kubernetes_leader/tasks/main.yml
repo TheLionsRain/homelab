@@ -1,4 +1,13 @@
 ---
+- name: Ensure /etc/apt/keyrings exists
+  ansible.builtin.file:
+    path: /etc/apt/keyrings
+    state: directory
+    mode: '0755'
+
+- name: Install Github CLI
+  ansible.builtin.include_tasks: install-githubcli.yml
+
 - name: Install K3S
   ansible.builtin.include_tasks: install-k3s.yaml
 
