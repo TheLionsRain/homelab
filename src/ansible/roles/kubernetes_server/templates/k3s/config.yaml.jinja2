@@ -1,0 +1,7 @@
+---
+write-kubeconfig-mode: 0644
+disable: {{ disabled_components | to_yaml }}
+tls-san: {{ tls_sans | to_yaml }}
+server: https://{{ leader_ip }}:6443
+token: "{{ k3s_join_token }}"
+flannel-backend: none

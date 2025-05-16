@@ -5,6 +5,10 @@ all:
       ansible_host: 10.0.4.8
       ansible_ssh_private_key_file: ~/.ssh/helheim
       ansible_user: michiel
+    helheim-002:
+      ansible_host: 10.0.4.9
+      ansible_ssh_private_key_file: ~/.ssh/helheim
+      ansible_user: michiel
 
   children:
     ubuntu:
@@ -14,7 +18,12 @@ all:
     helheim_cluster:
       hosts:
         helheim-001:
+        helheim-002:
 
     helheim_leader:
       hosts:
         helheim-001:
+
+    helheim_servers:
+      hosts:
+        helheim-002:
