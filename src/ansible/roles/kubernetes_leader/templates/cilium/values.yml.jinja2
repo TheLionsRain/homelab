@@ -14,4 +14,4 @@ l2announcements.leaseDuration: "3s"
 l2announcements.leaseRenewDeadline: "1s"
 l2announcements.leaseRetryPeriod: "500ms"
 externalIPs.enabled: true
-devices: devices: "{{ '{' + cilium_network_interfaces | join(',') + '}' }}"
+devices: "{{ '{' + cilium_network_interfaces | join(',') + '}' }}"

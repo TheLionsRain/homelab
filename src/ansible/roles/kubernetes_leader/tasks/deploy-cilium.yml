@@ -87,6 +87,8 @@
     --set devices="{{ '{' + cilium_network_interfaces | join(',') + '}' }}"
     --set externalIPs.enabled=true
     --set operator.replicas=2
+    --set vlan-bpf-bypass=0
+    --set ipam.operator.clusterPoolIPv4PodCIDRList=192.168.0.0/16
   register: cilium_install_result
   changed_when: "'already installed' not in cilium_install_result.stderr"
   when: not cilium_installed

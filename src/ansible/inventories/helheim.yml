@@ -1,0 +1,20 @@
+---
+all:
+  hosts:
+    helheim-001:
+      ansible_host: 10.0.4.8
+      ansible_ssh_private_key_file: ~/.ssh/helheim
+      ansible_user: michiel
+
+  children:
+    ubuntu:
+      hosts:
+        helheim-001:
+
+    helheim_cluster:
+      hosts:
+        helheim-001:
+
+    helheim_leader:
+      hosts:
+        helheim-001:
