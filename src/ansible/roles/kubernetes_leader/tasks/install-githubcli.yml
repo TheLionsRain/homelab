@@ -18,9 +18,9 @@
 - name: Add GitHub CLI apt repository
   ansible.builtin.apt_repository:
     repo: >
-      "deb [arch={{ dpkg_architecture }}
+      deb [arch={{ dpkg_architecture }}
       signed-by=/etc/apt/keyrings/githubcli.gpg]
-      https://cli.github.com/packages stable main"
+      https://cli.github.com/packages stable main
     filename: githubcli
     state: present
   become: true
