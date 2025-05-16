@@ -58,7 +58,7 @@
 
 - name: Write GitHub token to file
   ansible.builtin.copy:
-    content: "{{ github_token }}"
+    content: "{{ access_token }}"
     dest: "/home/{{ ansible_user }}/.github_token"
     mode: '0600'
 

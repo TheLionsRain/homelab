@@ -1,4 +1,0 @@
----
-github_token: "#{PAT_TOKEN}#"
-github_env: helheim
-github_repo: TheLionsRain/homelab
