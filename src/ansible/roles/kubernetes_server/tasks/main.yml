@@ -1,0 +1,3 @@
+---
+- name: Install K3S
+  ansible.builtin.include_tasks: install-k3s.yaml
