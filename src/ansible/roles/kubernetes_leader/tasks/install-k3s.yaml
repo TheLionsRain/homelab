@@ -46,6 +46,7 @@
     state: directory
     owner: "{{ ansible_user }}"
     mode: '0755'
+  when: not k3s_active | default(false)
 
 - name: Copy K3S kubectl config
   ansible.builtin.copy:
@@ -55,28 +56,43 @@
     owner: "{{ ansible_user }}"
     mode: '0644'
   become: true
+  when: not k3s_active | default(false)
 
 - name: Write GitHub token to file
   ansible.builtin.copy:
     content: "{{ access_token }}"
     dest: "/home/{{ ansible_user }}/.github_token"
     mode: '0600'
+  when: not k3s_active | default(false)
 
 - name: Log in to GitHub
   ansible.builtin.shell: |
     set -o pipefail
     gh auth login --with-token < "/home/{{ ansible_user }}/.github_token"
+  changed_when: true
+  when: not k3s_active | default(false)
 
 - name: Read k3s manager join token
   ansible.builtin.slurp:
     src: /var/lib/rancher/k3s/server/node-token
   register: node_token_raw
   become: true
+  when: not k3s_active | default(false)
 
 - name: Set decoded join token as a fact
   ansible.builtin.set_fact:
     k3s_join_token: "{{ node_token_raw.content | b64decode | regex_replace('\n', '') }}"
+  when: not k3s_active | default(false)
 
 - name: Push K3s join token to GitHub Environment Secret
   ansible.builtin.shell: |
+    set -o pipefail
     echo "{{ k3s_join_token | trim }}" | gh secret set K3S_JOIN_TOKEN --env {{ github_env }} --repo {{ github_repo }}
+  changed_when: true
+  when: not k3s_active | default(false)
+
+- name: Remove GitHub token file
+  ansible.builtin.file:
+    path: "/home/{{ ansible_user }}/.github_token"
+    state: absent
+  when: not k3s_active | default(false)
