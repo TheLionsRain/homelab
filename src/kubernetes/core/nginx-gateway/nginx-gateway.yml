@@ -1,0 +1,29 @@
+---
+apiVersion: argoproj.io/v1alpha1
+kind: Application
+metadata:
+  name: nginx-gateway
+  namespace: argocd
+  labels:
+    app: nginx-gateway
+spec:
+  destination:
+    namespace: nginx-gateway
+    server: https://kubernetes.default.svc
+  project: default
+  sources:
+  - repoURL: ghcr.io/nginx/charts
+    chart: nginx-gateway-fabric
+    targetRevision: 1.6.2
+  - repoURL: 'https://github.com/TheLionsRain/homelab.git'
+    path: src/kubernetes/core/nginx-gateway/manifests
+    targetRevision: HEAD
+  syncPolicy:
+    automated:
+      allowEmpty: true
+      prune: true
+      selfHeal: true
+    syncOptions:
+      - ApplyOutOfSyncOnly=true
+      - ServerSideApply=true
+      - CreateNamespace=true

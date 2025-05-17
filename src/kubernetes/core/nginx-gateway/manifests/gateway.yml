@@ -1,0 +1,24 @@
+---
+apiVersion: gateway.networking.k8s.io/v1
+kind: Gateway
+metadata:
+  name: nginx
+  namespace: nginx-gateway
+  annotations:
+    cert-manager.io/cluster-issuer: cloudflare
+    cert-manager.io/issue-temporary-certificate: "true"
+spec:
+  gatewayClassName: nginx
+  listeners:
+  - name: https
+    port: 443
+    protocol: HTTPS
+    hostname: '*.helheim.valhallahub.nl'
+    allowedRoutes:
+      namespaces:
+        from: All
+    tls:
+      mode: Terminate
+      certificateRefs:
+        - name: nginx-cert
+          namespace: nginx-gateway
