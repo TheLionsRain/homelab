@@ -9,6 +9,7 @@ on:
     - src/ansible/inventories/helheim.yml
     - src/ansible/playbooks/kubernetes_join.server.yml
     - src/ansible/roles/kubernetes_server/**
+  workflow_dispatch:
 
 jobs:
   deploy-helheim-kubernetes-servers:

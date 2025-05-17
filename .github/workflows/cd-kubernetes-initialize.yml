@@ -9,6 +9,7 @@ on:
       - src/ansible/inventories/helheim.yml
       - src/ansible/playbooks/kubernetes_initialize.yml
       - src/ansible/roles/kubernetes_leader/**
+  workflow_dispatch:
 
 jobs:
   initialize-helheim-kubernetes:
