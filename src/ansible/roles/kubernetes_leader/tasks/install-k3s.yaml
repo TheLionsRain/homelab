@@ -90,6 +90,8 @@
   ansible.builtin.shell: |
     set -o pipefail
     echo "{{ k3s_join_token | trim }}" | gh secret set K3S_JOIN_TOKEN --env {{ github_env }} --repo {{ github_repo }}
+  args:
+    executable: /bin/bash
   changed_when: true
   when: not k3s_active | default(false)
 
