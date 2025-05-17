@@ -66,11 +66,12 @@
   when: not k3s_active | default(false)
 
 - name: Log in to GitHub
-  ansible.builtin.shell: |
+  shell: |
     set -o pipefail
-    gh auth login --with-token < "/home/{{ ansible_user }}/.github_token"
+    gh auth login --with-token < "/home/michiel/.github_token"
+  args:
+    executable: /bin/bash
   changed_when: true
-  executable: /bin/bash
   when: not k3s_active | default(false)
 
 - name: Read k3s manager join token
