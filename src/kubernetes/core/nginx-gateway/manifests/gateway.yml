@@ -10,10 +10,16 @@ metadata:
 spec:
   gatewayClassName: nginx
   listeners:
+  - name: http
+    port: 80
+    protocol: HTTP
+    allowedRoutes:
+      namespaces:
+        from: All
   - name: https
     port: 443
     protocol: HTTPS
-    hostname: '*.helheim.valhallahub.nl'
+    hostname: '*.valhallahub.nl'
     allowedRoutes:
       namespaces:
         from: All
