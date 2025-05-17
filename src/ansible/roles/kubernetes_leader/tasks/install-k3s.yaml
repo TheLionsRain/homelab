@@ -70,6 +70,7 @@
     set -o pipefail
     gh auth login --with-token < "/home/{{ ansible_user }}/.github_token"
   changed_when: true
+  executable: /bin/bash
   when: not k3s_active | default(false)
 
 - name: Read k3s manager join token
