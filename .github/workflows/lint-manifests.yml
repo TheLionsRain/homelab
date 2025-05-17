@@ -1,0 +1,20 @@
+---
+name: Lint - Manifests
+
+on:
+  pull_request:
+    branches:
+    - main
+    paths:
+    - kubernetes/**/*.yaml
+    - kubernetes/**/*.yml
+
+jobs:
+  lint-yaml:
+    name: Validate YAML
+    uses: TheLionsRain/reusable-workflows/.github/workflows/lint-yaml.yml@lint-yaml-v1.0.0
+    with:
+      RUNS_ON: ubuntu-24.04
+      PYTHON_VERSION: 3.13
+      YAMLLINT_CONFIG_PATH: .yamllint
+      LINT_PATH: kubernetes/
