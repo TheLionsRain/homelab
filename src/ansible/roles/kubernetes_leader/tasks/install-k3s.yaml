@@ -76,7 +76,7 @@
 
 - name: Read k3s manager join token
   ansible.builtin.slurp:
-    src: /var/lib/rancher/k3s/server/node-token
+    src: /var/lib/rancher/k3s/server/token
   register: node_token_raw
   become: true
   when: not k3s_active | default(false)
