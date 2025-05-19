@@ -1,0 +1,31 @@
+---
+name: CD - Terraform
+
+on:
+  push:
+    branches:
+    - main
+    paths:
+    - src/terraform/**
+
+permissions:
+  contents: read
+  id-token: write
+
+jobs:
+  deploy-terraform-helheim:
+    name: Validate Terraform
+    uses: TheLionsRain/reusable-workflows/.github/workflows/deploy-terraform.yml@deploy-terraform-v1.0.0
+    with:
+      ENVIRONMENT: helheim
+      TERRAFORM_WORKING_DIRECTORY: src/terraform
+      TERRAFORM_BACKEND: tfbackends/helheim.tfbackend
+      TERRAFORM_VARFILE: tfvars/helheim.tfvars
+      FILES_TO_TOKENIZE: tfvars/helheim.tfvars
+    secrets:
+      AZURE_CLIENT_ID: ${{ secrets.AZURE_CLIENT_ID }}
+      AZURE_SUBSCRIPTION_ID: ${{ secrets.AZURE_SUBSCRIPTION_ID }}
+      AZURE_TENANT_ID: ${{ secrets.AZURE_TENANT_ID }} 
+      TOKENS: '{
+          CLOUDFLARE_API_TOKEN: "${{ secrets.CLOUDFLARE_API_TOKEN }}",
+        }'
