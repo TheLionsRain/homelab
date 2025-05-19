@@ -2,7 +2,7 @@
 name: CI - Terraform
 
 on:
-  push:
+  pull_request:
     branches:
     - main
     paths:
