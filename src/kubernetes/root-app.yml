@@ -1,0 +1,26 @@
+---
+apiVersion: argoproj.io/v1alpha1
+kind: Application
+metadata:
+  name: root-app
+  namespace: argocd
+  finalizers:
+  - resources-finalizer.argocd.argoproj.io
+  labels:
+    app: bootstrap
+spec:
+  destination:
+    namespace: argocd
+    name: in-cluster
+  project: default
+  source:
+    path: src/kubernetes/core
+    repoURL: 'https://github.com/TheLionsRain/homelab.git'
+    targetRevision: HEAD
+  syncPolicy:
+    syncOptions:
+      - ApplyOutOfSyncOnly=true
+    automated:
+      allowEmpty: true
+      prune: true
+      selfHeal: true
