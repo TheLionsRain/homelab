@@ -8,3 +8,4 @@ resources:
 - longhorn/application.yml
 - cert-manager/application.yml
 - nginx-gateway/application.yml
+- cloudnative-pg/application.yml
