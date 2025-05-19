@@ -17,6 +17,9 @@ spec:
       values: |
         preUpgradeChecker:
           jobEnabled: false
+  - repoURL: 'https://github.com/TheLionsRain/homelab.git'
+    path: src/kubernetes/core/longhorn/manifests
+    targetRevision: HEAD
   syncPolicy:
     automated:
       allowEmpty: true
