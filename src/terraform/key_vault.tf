@@ -19,6 +19,15 @@ resource "azurerm_key_vault" "kv" {
   purge_protection_enabled  = var.key_vault_purge_protection
 }
 
+## Role Assignments
+resource "azurerm_role_assignment" "roles" {
+  for_each             = { for role in var.key_vault_role_assignments : "${role.principal_id}-${role.role_definition_name}" => role }
+  scope                = azurerm_key_vault.kv.id
+  role_definition_name = each.value.role_definition_name
+  principal_id         = each.value.principal_id
+}
+
+## Secrets
 resource "azurerm_key_vault_secret" "secrets" {
   for_each     = nonsensitive(var.key_vault_secrets)
   name         = each.key

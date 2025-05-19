@@ -7,6 +7,10 @@ terraform {
   }
 }
 
+terraform {
+  backend "azurerm" {}
+}
+
 provider "azurerm" {
   subscription_id = var.deployment_subscription_id
   features {}

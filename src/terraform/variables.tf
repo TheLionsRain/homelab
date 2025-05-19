@@ -38,6 +38,16 @@ variable "key_vault_purge_protection" {
   default     = false
 }
 
+## Key Vault Role Assignments
+variable "key_vault_role_assignments" {
+  description = "A list of role assignments for the Key Vault. Defaults to an empty list."
+  type = list(object({
+    role_definition_name = string
+    principal_id         = string
+  }))
+  default = []
+}
+
 ## Key Vault Secrets
 variable "key_vault_secrets" {
   description = "A map of secrets to be stored in the Key Vault. Defaults to an empty object."
