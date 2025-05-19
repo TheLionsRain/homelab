@@ -12,7 +12,7 @@ spec:
     server: https://kubernetes.default.svc
   project: default
   sources:
-  - repoURL: 'https://github.com/TheLionsRain/homelab-gitops.git'
+  - repoURL: 'https://github.com/TheLionsRain/homelab.git'
     path: src/kubernetes/argocd/manifests
     targetRevision: HEAD
   syncPolicy:
