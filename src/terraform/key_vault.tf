@@ -33,4 +33,7 @@ resource "azurerm_key_vault_secret" "secrets" {
   name         = each.key
   value        = var.key_vault_secrets[each.key]
   key_vault_id = azurerm_key_vault.kv.id
+  depends_on = [
+    azurerm_role_assignment.roles
+  ]
 }
