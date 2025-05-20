@@ -26,6 +26,11 @@ global:
       secretKeyRef:
         name: authentik-app
         key: port
+  - name: AUTHENTIK_SECRET_KEY
+    valueFrom:
+      secretKeyRef:
+        name: authentik-crypto-key
+        key: authentik-crypto-key
 
 postgresql:
   enabled: false
