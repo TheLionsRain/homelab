@@ -6,11 +6,11 @@ key_vault_sku                 = "standard"
 key_vault_role_assignments = [
   {
     role_definition_name = "Key Vault Administrator"
-    principal_id         = "372dc01a-ddc4-4de0-b37d-472ffe31e28b" # sp-gh-homelab
+    principal_id         = "a176ebb0-c01d-473a-8205-2370942a9e9e" # sp-gh-homelab
   },
   {
     role_definition_name = "Key Vault Secrets User"
-    principal_id         = "09efc1fe-6ac9-4ada-8eb8-7d9d3c758c1c" # app-k8s-helheim-external-secrets-ne
+    principal_id         = "27274c88-7182-4afa-8bac-b7e7db0ba915" # app-k8s-helheim-external-secrets-ne
   }
 ]
 key_vault_secrets = {
