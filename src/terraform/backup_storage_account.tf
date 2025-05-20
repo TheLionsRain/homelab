@@ -28,6 +28,6 @@ resource "azurerm_storage_container" "container_longhorn" {
   name               = var.longhorn_container_name
   storage_account_id = azurerm_storage_account.st_backup.id
   depends_on = [
-    azurerm_role_assignment.roles
+    azurerm_role_assignment.roles_st_backup
   ]
 }
