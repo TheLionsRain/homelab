@@ -1,30 +1,31 @@
 ---
-env:
-- name: AUTHENTIK_POSTGRESQL__HOST
-  valueFrom:
-    secretKeyRef:
-      name: authentik-app
-      key: host
-- name: AUTHENTIK_POSTGRESQL__NAME
-  valueFrom:
-    secretKeyRef:
-      name: authentik-app
-      key: dbname
-- name: AUTHENTIK_POSTGRESQL__USER
-  valueFrom:
-    secretKeyRef:
-      name: authentik-app
-      key: username
-- name: AUTHENTIK_POSTGRESQL__PASSWORD
-  valueFrom:
-    secretKeyRef:
-      name: authentik-app
-      key: password
-- name: AUTHENTIK_POSTGRESQL__PORT
-  valueFrom:
-    secretKeyRef:
-      name: authentik-app
-      key: port
+global:
+  env:
+  - name: AUTHENTIK_POSTGRESQL__HOST
+    valueFrom:
+      secretKeyRef:
+        name: authentik-app
+        key: host
+  - name: AUTHENTIK_POSTGRESQL__NAME
+    valueFrom:
+      secretKeyRef:
+        name: authentik-app
+        key: dbname
+  - name: AUTHENTIK_POSTGRESQL__USER
+    valueFrom:
+      secretKeyRef:
+        name: authentik-app
+        key: username
+  - name: AUTHENTIK_POSTGRESQL__PASSWORD
+    valueFrom:
+      secretKeyRef:
+        name: authentik-app
+        key: password
+  - name: AUTHENTIK_POSTGRESQL__PORT
+    valueFrom:
+      secretKeyRef:
+        name: authentik-app
+        key: port
 
 postgresql:
   enabled: false
