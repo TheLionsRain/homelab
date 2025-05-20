@@ -13,7 +13,7 @@ key_vault_sku                 = "standard"
 ## Key Vault Role Assignments
 key_vault_role_assignments = [
   {
-    role_definition_name = "Key Vault Secrets Administrator"
+    role_definition_name = "Key Vault Administrator"
     principal_id         = "a176ebb0-c01d-473a-8205-2370942a9e9e" # sp-gh-homelab
   },
   {
