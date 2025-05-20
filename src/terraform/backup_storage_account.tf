@@ -16,7 +16,7 @@ resource "azurerm_storage_account" "st_backup" {
 }
 
 ## Role Assignments
-resource "azurerm_role_assignment" "roles" {
+resource "azurerm_role_assignment" "roles_st_backup" {
   for_each             = { for role in var.backup_storage_account_role_assignments : "${role.principal_id}-${role.role_definition_name}" => role }
   scope                = azurerm_storage_account.st_backup.id
   role_definition_name = each.value.role_definition_name

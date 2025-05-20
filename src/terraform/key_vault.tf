@@ -20,7 +20,7 @@ resource "azurerm_key_vault" "kv" {
 }
 
 ## Role Assignments
-resource "azurerm_role_assignment" "roles" {
+resource "azurerm_role_assignment" "roles_kv" {
   for_each             = { for role in var.key_vault_role_assignments : "${role.principal_id}-${role.role_definition_name}" => role }
   scope                = azurerm_key_vault.kv.id
   role_definition_name = each.value.role_definition_name
