@@ -48,3 +48,6 @@ backup_storage_account_role_assignments = [
     principal_id         = "616f3b54-c44f-4758-bc09-96a8247cb324" # app-k8s-helheim-longhorn-ne
   }
 ]
+
+## Storage Account - Backup - Longhorn Container
+longhorn_container_name = "c-backup"
