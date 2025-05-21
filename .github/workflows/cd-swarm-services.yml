@@ -8,6 +8,7 @@ on:
     paths:
     - src/ansible/playbooks/swarm_deploy-services.yml
     - src/ansible/roles/swarm_services/**
+  workflow_dispatch:
 
 jobs:
   deploy-muspelheim-swarm-services:

@@ -9,6 +9,7 @@ on:
     - src/ansible/inventories/muspelheim.yml
     - src/ansible/playbooks/swarm_join.worker.yml
     - src/ansible/roles/swarm_worker/**
+  workflow_dispatch:
 
 jobs:
   deploy-muspelheim-swarm-workers:
