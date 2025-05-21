@@ -25,7 +25,7 @@ key_vault_role_assignments = [
 ## Key Vault Secrets
 key_vault_secrets = {
   "cloudflare-api-token" = "#{CLOUDFLARE_API_TOKEN}#",
-  "authentik-crypto-key" = "#{AUTHENTIK_CRYPTO_KEY}"
+  "authentik-crypto-key" = "#{AUTHENTIK_CRYPTO_KEY}#"
 }
 
 # Storage Account Variables
