@@ -21,7 +21,7 @@ jobs:
       TERRAFORM_WORKING_DIRECTORY: src/terraform
       TERRAFORM_BACKEND: tfbackends/helheim.tfbackend
       TERRAFORM_VARFILE: tfvars/helheim.tfvars
-      FILES_TO_TOKENIZE: tfvars/helheim.tfvars
+      FILES_TO_TOKENIZE: src/terraform/tfvars/helheim.tfvars
     secrets:
       AZURE_CLIENT_ID: ${{ secrets.AZURE_CLIENT_ID }}
       AZURE_SUBSCRIPTION_ID: ${{ secrets.AZURE_SUBSCRIPTION_ID }}
