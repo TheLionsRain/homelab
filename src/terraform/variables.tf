@@ -122,3 +122,14 @@ variable "longhorn_container_name" {
   description = "The name of the Longhorn container."
   type        = string
 }
+
+## Storage Account - Backup - Secrets
+variable "st_backup_name_secret_name" {
+  description = "The name of the storage account name secret for backups."
+  type        = string
+}
+
+variable "st_backup_access_key_secret_name" {
+  description = "The name of the storage account access key secret for backups."
+  type        = string
+}

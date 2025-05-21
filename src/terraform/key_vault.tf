@@ -26,14 +26,3 @@ resource "azurerm_role_assignment" "roles_kv" {
   role_definition_name = each.value.role_definition_name
   principal_id         = each.value.principal_id
 }
-
-## Secrets
-resource "azurerm_key_vault_secret" "secrets" {
-  for_each     = nonsensitive(var.key_vault_secrets)
-  name         = each.key
-  value        = var.key_vault_secrets[each.key]
-  key_vault_id = azurerm_key_vault.kv.id
-  depends_on = [
-    azurerm_role_assignment.roles_kv
-  ]
-}
