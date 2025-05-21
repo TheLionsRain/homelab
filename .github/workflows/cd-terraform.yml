@@ -27,5 +27,6 @@ jobs:
       AZURE_SUBSCRIPTION_ID: ${{ secrets.AZURE_SUBSCRIPTION_ID }}
       AZURE_TENANT_ID: ${{ secrets.AZURE_TENANT_ID }} 
       TOKENS: '{
-          CLOUDFLARE_API_TOKEN: "${{ secrets.CLOUDFLARE_API_TOKEN }}",
+          "CLOUDFLARE_API_TOKEN": "${{ secrets.CLOUDFLARE_API_TOKEN }}",
+          "AUTHENTIK_CRYPTO_KEY": "${{ secrets.AUTHENTIK_CRYPTO_KEY }}"
         }'
