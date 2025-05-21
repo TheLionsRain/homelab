@@ -14,7 +14,7 @@ on:
 jobs:
   initialize-helheim-kubernetes:
     name: Initialize Kubernetes Cluster - Helheim
-    uses: TheLionsRain/reusable-workflows/.github/workflows/deploy-ansible.yml@deploy-ansible-v1.0.0
+    uses: TheLionsRain/reusable-workflows/.github/workflows/deploy-ansible.yml@deploy-ansible-v1.0.1
     with:
       RUNS_ON: self-hosted
       ENVIRONMENT: helheim

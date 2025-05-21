@@ -15,7 +15,7 @@ permissions:
 jobs:
   deploy-terraform-helheim:
     name: Validate Terraform
-    uses: TheLionsRain/reusable-workflows/.github/workflows/deploy-terraform.yml@deploy-terraform-v1.0.0
+    uses: TheLionsRain/reusable-workflows/.github/workflows/deploy-terraform.yml@deploy-terraform-v1.0.1
     with:
       ENVIRONMENT: helheim
       TERRAFORM_WORKING_DIRECTORY: src/terraform
