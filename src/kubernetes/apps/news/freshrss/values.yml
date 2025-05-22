@@ -1,1 +1,7 @@
+envFrom:
+- configMapRef:
+    name: freshrss
+- secretRef:
+    name: authentik-client-secret
+
 env.TZ: "Belgium/Brussels"
