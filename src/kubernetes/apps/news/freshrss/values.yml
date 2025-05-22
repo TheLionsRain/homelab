@@ -11,4 +11,4 @@ persistence:
     storageClass: longhorn-custom
 
 env:
-  TZ: "Belgium/Brussels"
+  TZ: "Europe/Brussels"
