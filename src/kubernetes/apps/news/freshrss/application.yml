@@ -1,0 +1,32 @@
+---
+apiVersion: argoproj.io/v1alpha1
+kind: Application
+metadata:
+  name: freshrss
+  namespace: argocd
+  labels:
+    app: freshrss
+spec:
+  destination:
+    namespace: freshrss
+    server: https://kubernetes.default.svc
+  project: news
+  sources:
+  - chart: freshrss
+    repoURL: https://k8s-home-lab.github.io/helm-charts/
+    targetRevision: v7.0.1
+    helm:
+      valueFiles:
+        - $values/src/kubernetes/apps/news/freshrss/values.yml
+  - repoURL: 'https://github.com/TheLionsRain/homelab.git'
+    targetRevision: HEAD
+    ref: values
+  syncPolicy:
+    automated:
+      allowEmpty: true
+      prune: true
+      selfHeal: true
+    syncOptions:
+      - ApplyOutOfSyncOnly=true
+      - ServerSideApply=true
+      - CreateNamespace=true
