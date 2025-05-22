@@ -10,3 +10,4 @@ data:
   OIDC_CLIENT_ID: L4vC5hSJukpqLh2696fJHSkYP75KLEpcY3kM8s9q
   OIDC_X_FORWARDED_HEADERS: X-Forwarded-Port X-Forwarded-Proto X-Forwarded-Host
   OIDC_SCOPES: openid profile email
+  OIDC_REMOTE_USER_CLAIM: preferred_username
