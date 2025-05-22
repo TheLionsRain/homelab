@@ -7,6 +7,6 @@ metadata:
 data:
   OIDC_ENABLED: "1"
   OIDC_PROVIDER_METADATA_URL: https://authentik.valhallahub.nl/application/o/freshrss/.well-known/openid-configuration
-  OIDC_CLIENT_ID: Z46ird2duTRAVMMXn5rC6bYUuOpkodQ2c9YBd0im
+  OIDC_CLIENT_ID: L4vC5hSJukpqLh2696fJHSkYP75KLEpcY3kM8s9q
   OIDC_X_FORWARDED_HEADERS: X-Forwarded-Port X-Forwarded-Proto X-Forwarded-Host
   OIDC_SCOPES: openid profile email
