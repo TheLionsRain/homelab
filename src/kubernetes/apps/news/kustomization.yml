@@ -4,4 +4,4 @@ kind: Kustomization
 
 resources:
 - project.yml
-- src/kubernetes/apps/news/freshrss/application.yml
+- freshrss/application.yml
