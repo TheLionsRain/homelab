@@ -4,4 +4,10 @@ envFrom:
 - secretRef:
     name: authentik-client-secret
 
+persistence:
+  config:
+    enabled: true
+    size: 100m
+    storageClass: longhorn-custom
+
 env.TZ: "Belgium/Brussels"
