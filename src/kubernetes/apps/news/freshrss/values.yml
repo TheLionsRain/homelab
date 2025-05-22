@@ -10,4 +10,5 @@ persistence:
     size: 100m
     storageClass: longhorn-custom
 
-env.TZ: "Belgium/Brussels"
+env:
+  TZ: "Belgium/Brussels"
