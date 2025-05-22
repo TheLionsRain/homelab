@@ -4,6 +4,7 @@ persistence:
     enabled: true
     size: 100m
     storageClass: longhorn-custom
+    mountPath: /config
 
 env:
   TZ: "Europe/Brussels"
