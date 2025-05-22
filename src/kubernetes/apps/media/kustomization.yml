@@ -4,4 +4,4 @@ kind: Kustomization
 
 resources:
 - project.yml
-- src/kubernetes/apps/media/prowlarr/application.yml
+- prowlarr/application.yml
