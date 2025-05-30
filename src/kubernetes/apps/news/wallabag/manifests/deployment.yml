@@ -26,7 +26,7 @@ spec:
           valueFrom:
             secretKeyRef:
               name: wallabag-app
-              key: pgpass
+              key: password
         - name: POSTGRES_USER
           valueFrom:
             secretKeyRef:
