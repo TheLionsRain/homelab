@@ -8,3 +8,6 @@ env:
       secretKeyRef:
         name: cloudflare-api-key
         key: api-token
+
+extraArgs:
+  - --source=gateway-httproute
