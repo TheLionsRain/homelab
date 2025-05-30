@@ -11,7 +11,7 @@ storage:
     class: longhorn-custom
     path: /data
     keepPvc: true
-    accessModes: ReadWriteOnce
+    accessMode: ReadWriteOnce
 
   attachments:
     size: 5Gi
@@ -19,7 +19,7 @@ storage:
     class: longhorn-custom
     path: /files
     keepPvc: true
-    accessModes: ReadWriteOnce
+    accessMode: ReadWriteOnce
 
 database:
   type: postgresql
