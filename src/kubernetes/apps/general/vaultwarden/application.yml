@@ -1,0 +1,35 @@
+---
+apiVersion: argoproj.io/v1alpha1
+kind: Application
+metadata:
+  name: vaultwarden
+  namespace: argocd
+  labels:
+    app: vaultwarden
+spec:
+  destination:
+    namespace: vaultwarden
+    server: https://kubernetes.default.svc
+  project: general
+  sources:
+  - chart: vaultwarden
+    repoURL: https://guerzon.github.io/vaultwarden
+    targetRevision: 0.32.1
+    helm:
+      valueFiles:
+        - $values/src/kubernetes/apps/general/vaultwarden/manifests
+  - repoURL: 'https://github.com/TheLionsRain/homelab.git'
+    targetRevision: HEAD
+    ref: values
+  - repoURL: 'https://github.com/TheLionsRain/homelab.git'
+    path: src/kubernetes/apps/general/vaultwarden/manifests
+    targetRevision: HEAD
+  syncPolicy:
+    automated:
+      allowEmpty: true
+      prune: true
+      selfHeal: true
+    syncOptions:
+      - ApplyOutOfSyncOnly=true
+      - ServerSideApply=true
+      - CreateNamespace=true

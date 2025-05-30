@@ -1,0 +1,24 @@
+---
+replicas: 2
+
+storage:
+  data:
+    size: 2Gi
+    name: vaultwarden-data
+    class: longhorn-custom
+    path: /data
+    keepPvc: true
+    accessModes: ReadWriteOnce
+
+  attachments:
+    size: 5Gi
+    name: vaultwarden-files
+    class: longhorn-custom
+    path: /files
+    keepPvc: true
+    accessModes: ReadWriteOnce
+
+database:
+  type: postgresql
+  existingSecret: vaultwarden-app
+  existingSecretKey: uri
