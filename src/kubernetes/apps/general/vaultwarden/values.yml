@@ -26,4 +26,4 @@ database:
   existingSecret: vaultwarden-app
   existingSecretKey: uri
 
-domain: vaultwarden.valhallahub.nl
+domain: https://vaultwarden.valhallahub.nl
