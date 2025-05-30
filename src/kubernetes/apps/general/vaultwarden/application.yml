@@ -17,7 +17,7 @@ spec:
     targetRevision: 0.32.1
     helm:
       valueFiles:
-        - $values/src/kubernetes/apps/general/vaultwarden/manifests
+        - $values/src/kubernetes/apps/general/vaultwarden/values.yml
   - repoURL: 'https://github.com/TheLionsRain/homelab.git'
     targetRevision: HEAD
     ref: values
