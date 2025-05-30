@@ -1,6 +1,9 @@
 ---
 replicas: 2
 
+serviceAccount:
+  name: vaultwarden
+
 storage:
   data:
     size: 2Gi
