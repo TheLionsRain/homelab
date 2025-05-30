@@ -11,3 +11,4 @@ resources:
 - cloudnative-pg/application.yml
 - authentik/application.yml
 - external-secrets/application.yml
+- external-dns/application.yml
