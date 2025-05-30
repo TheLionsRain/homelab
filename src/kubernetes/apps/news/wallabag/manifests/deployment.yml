@@ -60,7 +60,9 @@ spec:
               name: wallabag-app
               key: password
         - name: SYMFONY__ENV__DOMAIN_NAME
-          value: wallabag.valhallahub.nl
+          value: https://wallabag.valhallahub.nl
+        - name: POPULATE_DATABASE
+          value: "False"
         volumeMounts:
         - name: wallabag-images
           mountPath: /var/www/wallabag/web/assets/images
