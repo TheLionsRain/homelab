@@ -1,0 +1,29 @@
+---
+apiVersion: argoproj.io/v1alpha1
+kind: Application
+metadata:
+  name: external-secrets
+  namespace: argocd
+  labels:
+    app: external-secrets
+spec:
+  destination:
+    namespace: external-secrets
+    server: https://kubernetes.default.svc
+  project: default
+  sources:
+  - repoURL: https://charts.external-secrets.io
+    chart: external-secrets
+    targetRevision: v0.17.0
+  - repoURL: 'https://github.com/TheLionsRain/homelab.git'
+    path: src/kubernetes/core/external-secrets/manifests
+    targetRevision: HEAD
+  syncPolicy:
+    automated:
+      allowEmpty: true
+      prune: true
+      selfHeal: true
+    syncOptions:
+      - ApplyOutOfSyncOnly=true
+      - ServerSideApply=true
+      - CreateNamespace=true
