@@ -10,3 +10,4 @@ resources:
 - nginx-gateway/application.yml
 - cloudnative-pg/application.yml
 - authentik/application.yml
+- external-secrets/application.yml
