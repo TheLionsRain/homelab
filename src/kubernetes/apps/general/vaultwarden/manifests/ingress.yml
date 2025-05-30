@@ -1,0 +1,20 @@
+---
+apiVersion: gateway.networking.k8s.io/v1
+kind: HTTPRoute
+metadata:
+  name: vaultwarden
+  namespace: vaultwarden
+spec:
+  parentRefs:
+  - name: nginx
+    namespace: nginx-gateway
+  hostnames:
+  - vaultwarden.valhallahub.nl
+  rules:
+  - matches:
+    - path:
+        type: PathPrefix
+        value: /
+    backendRefs:
+    - name: vaultwarden
+      port: 80
