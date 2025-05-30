@@ -1,0 +1,71 @@
+---
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: wallabag
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: wallabag
+  template:
+    metadata:
+      labels:
+        app: wallabag
+    spec:
+      containers:
+      - name: wallabag
+        image: wallabag/wallabag:2.6.12
+        securityContext:
+          allowPrivilegeEscalation: false
+        ports:
+        - containerPort: 80
+          protocol: TCP
+        env:
+        - name: POSTGRES_PASSWORD
+          valueFrom:
+            secretKeyRef:
+              name: wallabag-app
+              key: pgpass
+        - name: POSTGRES_USER
+          valueFrom:
+            secretKeyRef:
+              name: wallabag-app
+              key: user
+        - name: SYMFONY__ENV__DATABASE_DRIVER
+          value: pdo_pgsql
+        - name: SYMFONY__ENV__DATABASE_HOST
+          valueFrom:
+            secretKeyRef:
+              name: wallabag-app
+              key: host
+        - name: SYMFONY__ENV__DATABASE_PORT
+          valueFrom:
+            secretKeyRef:
+              name: wallabag-app
+              key: port
+        - name: SYMFONY__ENV__DATABASE_NAME
+          valueFrom:
+            secretKeyRef:
+              name: wallabag-app
+              key: dbname
+        - name: SYMFONY__ENV__DATABASE_USER
+          valueFrom:
+            secretKeyRef:
+              name: wallabag-app
+              key: username
+        - name: SYMFONY__ENV__DATABASE_PASSWORD
+          valueFrom:
+            secretKeyRef:
+              name: wallabag-app
+              key: password
+        - name: SYMFONY__ENV__DOMAIN_NAME
+          value: wallabag.valhallahub.nl
+        volumeMounts:
+        - name: wallabag-images
+          mountPath: /var/www/wallabag/web/assets/images
+      volumes:
+      - name: wallabag-images
+        persistentVolumeClaim:
+          claimName: wallabag-images
+      restartPolicy: Always

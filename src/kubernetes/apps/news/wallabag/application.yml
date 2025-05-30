@@ -1,0 +1,26 @@
+---
+apiVersion: argoproj.io/v1alpha1
+kind: Application
+metadata:
+  name: wallabag
+  namespace: argocd
+  labels:
+    app: wallabag
+spec:
+  destination:
+    namespace: wallabag
+    server: https://kubernetes.default.svc
+  project: news
+  sources:
+  - repoURL: 'https://github.com/TheLionsRain/homelab.git'
+    path: src/kubernetes/apps/news/wallabag/manifests
+    targetRevision: HEAD
+  syncPolicy:
+    automated:
+      allowEmpty: true
+      prune: true
+      selfHeal: true
+    syncOptions:
+      - ApplyOutOfSyncOnly=true
+      - ServerSideApply=true
+      - CreateNamespace=true
